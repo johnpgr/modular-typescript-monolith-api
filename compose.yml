@@ -1,0 +1,28 @@
+# FOR DEVELOPMENT ENVIRONMENT ONLY
+services:
+  postgres:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: obrafacil
+    ports:
+      - "5432:5432"
+    volumes:
+      # PG 18+ breaking change: mount /var/lib/postgresql (NOT /var/lib/postgresql/data)
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d obrafacil"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+  jaeger:
+    image: jaegertracing/jaeger:latest
+    ports:
+      - "16686:16686" # Jaeger UI -> http://localhost:16686
+      - "4317:4317"   # OTLP gRPC
+      - "4318:4318"   # OTLP HTTP -> OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
+    restart: unless-stopped
+volumes:
+  postgres_data:
