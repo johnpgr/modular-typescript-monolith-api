@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "node --env-file-if-exists=.env src/Main.ts",
-    "dev": "node --watch-path=src --watch-preserve-output --env-file-if-exists=.env src/Main.ts",
+    "dev": "node --watch --watch-preserve-output --env-file-if-exists=.env src/Main.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint",
