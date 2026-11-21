@@ -1,0 +1,24 @@
+{
+  "name": "modular-typescript-monolith-api",
+  "version": "0.0.1",
+  "description": "",
+  "author": "johnpgr",
+  "type": "module",
+  "main": "src/main.ts",
+  "engines": {
+    "node": ">=26.13.1"
+  },
+  "imports": {
+    "#/*": "./src/*"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/main.ts",
+    "dev": "node --watch-path=src --watch-preserve-output --env-file-if-exists=.env src/main.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "typescript": "^7.1.0-beta"
+  }
+}
